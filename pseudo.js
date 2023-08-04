@@ -78,12 +78,24 @@ const numbersToWords = {
 function convertNumberToWords(number) {
 	if (number in numbersToWords) return numbersToWords[number];
 	let words = "";
+	if (number >= 1000000) {
+		words += convertNumberToWords(Math.floor(number / 1000000)) + " Juta ";
+		number %= 1000000;
+	}
+	if (number >= 100000) {
+		words += convertNumberToWords(Math.floor(number / 100000)) + " Ratus Ribu ";
+		number %= 100000;
+	}
+	if (number >= 10000) {
+		words += convertNumberToWords(Math.floor(number / 10000)) + " Puluh Ribu ";
+		number %= 10000;
+	}
 	if (number >= 1000) {
 		words += convertNumberToWords(Math.floor(number / 1000)) + " Ribu ";
 		number %= 1000;
 	}
 	if (number >= 100) {
-		words += convertNumberToWords(Math.floor(number / 100)) + " ratus";
+		words += convertNumberToWords(Math.floor(number / 100)) + " Ratus";
 		number %= 100;
 	}
 	if (number > 0) {
@@ -101,4 +113,4 @@ function convertNumberToWords(number) {
 	return words;
 }
 
-console.log(convertNumberToWords(5900));
+console.log(convertNumberToWords(2000));
